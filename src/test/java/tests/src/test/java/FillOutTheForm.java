@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class FillOutTheForm extends BaseTest {
 
     @Test
+    @Description("Проверка на заполнение всех полей")
     void successfulFillFormTest(){
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
@@ -37,6 +39,7 @@ public class FillOutTheForm extends BaseTest {
     }
 
     @Test
+    @Description("Проверка только на заполнение обзяательных полей")
     void fillingInRequiredFields() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
