@@ -1,4 +1,3 @@
-import com.codeborne.selenide.Configuration;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ public class FillOutTheForm extends BaseTest {
 
     @Test
     @Description("Проверка на заполнение всех полей")
-    void successfulFillFormTest(){
+    void successfulFillFormTest() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
         $("#firstName").setValue("Sergey");
@@ -35,11 +34,10 @@ public class FillOutTheForm extends BaseTest {
         $("#submit").click();
 
         $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
-
     }
 
     @Test
-    @Description("Проверка только на заполнение обзяательных полей")
+    @Description("Проверка только на заполнение обязательных полей")
     void fillingInRequiredFields() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
@@ -49,6 +47,51 @@ public class FillOutTheForm extends BaseTest {
         $("#userNumber").setValue("1116757577");
         $("#submit").click();
         $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
+    }
 
+    @Test
+    @Description("Подтверждение формы без заполнениях обязательных полей")
+    void ConfirmWithoutFilling() {
+        open("/automation-practice-form.html");
+        $("[aria-label='Close']").click();
+        $("#submit").scrollTo().click();
+        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+
+    @Test
+    @Description("Подтверждение формы без заполнения мобильного телефона")
+    void fieldWithoutPhoneNumber() {
+        open("/automation-practice-form.html");
+        $("[aria-label='Close']").click();
+        $("#firstName").setValue("Sergey");
+        $("#lastName").setValue("Balandin");
+        $("#gender-radio-1").click();
+        $("#submit").scrollTo().click();
+        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+
+    @Test
+    @Description("Подтверждение формы, если заполнены обязательные поля и номер телефона !=10 цифрами")
+    void invalidPhoneNumber() {
+        open("/automation-practice-form.html");
+        $("[aria-label='Close']").click();
+        $("#firstName").setValue("Sergey");
+        $("#lastName").setValue("Balandin");
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue("123123123");
+        $("#submit").scrollTo().click();
+        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+
+    @Test
+    @Description("Подтверждение формы, если не выбран пол")
+    void noGenderSelected() {
+        open("/automation-practice-form.html");
+        $("[aria-label='Close']").click();
+        $("#firstName").setValue("Sergey");
+        $("#lastName").setValue("Balandin");
+        $("#userNumber").setValue("1231231234");
+        $("#submit").scrollTo().click();
+        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
     }
 }
