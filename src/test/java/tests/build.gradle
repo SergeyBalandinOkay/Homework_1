@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            'com.codeborne:selenide:7.14.0',
+            'org.junit.jupiter:junit-jupiter:5.14.2',
+            'org.junit.platform:junit-platform-launcher:1.14.2',
+            'org.testng:testng:7.9.0')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
