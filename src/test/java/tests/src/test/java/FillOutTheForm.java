@@ -18,14 +18,14 @@ public class FillOutTheForm extends BaseTest {
         $("#firstName").setValue("Sergey");
         $("#lastName").setValue("Balandin");
         $("#userEmail").setValue("loveandpeace@mail.ru");
-        $("#gender-radio-1").click();
+        $(byText("Male")).click();
         $("#userNumber").setValue("7775757577");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__day--001").click();
         $("#subjectsInput").click();
         $("#subjectsDropdown").click();
-        $("#hobbies-checkbox-3").click();
-        $("#uploadPicture").uploadFile(new File("C:/Users/user/Desktop/file"));
+        $(byText("Reading")).click();
+        $("#uploadPicture").uploadFromClasspath("myfile.png");
         $("#currentAddress").setValue("place23");
         $("#state").click();
         $(byText("Uttar Pradesh")).click();
@@ -34,6 +34,16 @@ public class FillOutTheForm extends BaseTest {
         $("#submit").click();
 
         $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
+        $("[id=resultModal]").shouldHave(text("Student Name"), text("Sergey Balandin"));
+        $("[id=resultModal]").shouldHave(text("Student Email"), text("loveandpeace@mail.ru"));
+        $("[id=resultModal]").shouldHave(text("Gender"), text("Male"));
+        $("[id=resultModal]").shouldHave(text("Mobile"), text("7775757577"));
+        $("[id=resultModal]").shouldHave(text("Date of Birth"), text("2008-07-01"));
+        $("[id=resultModal]").shouldHave(text("Subjects"), text("Chemistry"));
+        $("[id=resultModal]").shouldHave(text("Hobbies"), text("Reading"));
+        $("[id=resultModal]").shouldHave(text("Picture"), text("myfile.png"));
+        $("[id=resultModal]").shouldHave(text("Address"), text("place23"));
+        $("[id=resultModal]").shouldHave(text("State and City"), text("Uttar Pradesh Agra"));
     }
 
     @Test
@@ -43,10 +53,14 @@ public class FillOutTheForm extends BaseTest {
         $("[aria-label='Close']").click();
         $("#firstName").setValue("Sergey");
         $("#lastName").setValue("Balandin");
-        $("#gender-radio-1").click();
+        $(byText("Male")).click();
         $("#userNumber").setValue("1116757577");
         $("#submit").click();
+
         $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
+        $("[id=resultModal]").shouldHave(text("Student Name"), text("Sergey Balandin"));
+        $("[id=resultModal]").shouldHave(text("Gender"), text("Male"));
+        $("[id=resultModal]").shouldHave(text("Mobile"), text("1116757577"));
     }
 
     @Test

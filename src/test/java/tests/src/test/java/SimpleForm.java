@@ -19,7 +19,7 @@ public class SimpleForm extends BaseTest {
     }
 
     @Test
-    @Description("Заполнение формы только с обязательными полями")
+    @Description("Заполнение поле email невалидным значением")
     void EnteringAnInvalidEmail() {
         open("https://demoqa.com/text-box");
         $("#userEmail").setValue("email");
