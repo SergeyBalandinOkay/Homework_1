@@ -1,12 +1,11 @@
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static testdata.TestData.*;
 
 public class FillOutTheForm extends BaseTest {
 
@@ -15,35 +14,35 @@ public class FillOutTheForm extends BaseTest {
     void successfulFillFormTest() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
-        $("#firstName").setValue("Sergey");
-        $("#lastName").setValue("Balandin");
-        $("#userEmail").setValue("loveandpeace@mail.ru");
-        $(byText("Male")).click();
-        $("#userNumber").setValue("7775757577");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
+        $(byText(gender)).click();
+        $("#userNumber").setValue(userNumber);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__day--001").click();
         $("#subjectsInput").click();
         $("#subjectsDropdown").click();
-        $(byText("Reading")).click();
-        $("#uploadPicture").uploadFromClasspath("myfile.png");
-        $("#currentAddress").setValue("place23");
+        $(byText(hobbies)).click();
+        $("#uploadPicture").uploadFromClasspath(file);
+        $("#currentAddress").setValue(currentAddress);
         $("#state").click();
-        $(byText("Uttar Pradesh")).click();
+        $(byText(state)).click();
         $("#city").click();
-        $(byText("Agra")).click();
+        $(byText(city)).click();
         $("#submit").click();
 
-        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
-        $("[id=resultModal]").shouldHave(text("Student Name"), text("Sergey Balandin"));
-        $("[id=resultModal]").shouldHave(text("Student Email"), text("loveandpeace@mail.ru"));
-        $("[id=resultModal]").shouldHave(text("Gender"), text("Male"));
-        $("[id=resultModal]").shouldHave(text("Mobile"), text("7775757577"));
-        $("[id=resultModal]").shouldHave(text("Date of Birth"), text("2008-07-01"));
-        $("[id=resultModal]").shouldHave(text("Subjects"), text("Chemistry"));
-        $("[id=resultModal]").shouldHave(text("Hobbies"), text("Reading"));
-        $("[id=resultModal]").shouldHave(text("Picture"), text("myfile.png"));
-        $("[id=resultModal]").shouldHave(text("Address"), text("place23"));
-        $("[id=resultModal]").shouldHave(text("State and City"), text("Uttar Pradesh Agra"));
+        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text(successfulMessage));
+        $("[id=resultModal]").shouldHave(text("Student Name"), text(firstName + lastName));
+        $("[id=resultModal]").shouldHave(text("Student Email"), text(userEmail));
+        $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
+        $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
+        $("[id=resultModal]").shouldHave(text("Date of Birth"), text(DateOfBirth));
+        $("[id=resultModal]").shouldHave(text("Subjects"), text(subjects));
+        $("[id=resultModal]").shouldHave(text("Hobbies"), text(hobbies));
+        $("[id=resultModal]").shouldHave(text("Picture"), text(file));
+        $("[id=resultModal]").shouldHave(text("Address"), text(currentAddress));
+        $("[id=resultModal]").shouldHave(text("State and City"), text(state + " " + city));
     }
 
     @Test
@@ -51,16 +50,16 @@ public class FillOutTheForm extends BaseTest {
     void fillingInRequiredFields() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
-        $("#firstName").setValue("Sergey");
-        $("#lastName").setValue("Balandin");
-        $(byText("Male")).click();
-        $("#userNumber").setValue("1116757577");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $(byText(gender)).click();
+        $("#userNumber").setValue(userNumber);
         $("#submit").click();
 
-        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
-        $("[id=resultModal]").shouldHave(text("Student Name"), text("Sergey Balandin"));
-        $("[id=resultModal]").shouldHave(text("Gender"), text("Male"));
-        $("[id=resultModal]").shouldHave(text("Mobile"), text("1116757577"));
+        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text(successfulMessage));
+        $("[id=resultModal]").shouldHave(text("Student Name"), text(firstName + lastName));
+        $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
+        $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
     }
 
     @Test
@@ -69,7 +68,7 @@ public class FillOutTheForm extends BaseTest {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
         $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
     }
 
     @Test
@@ -77,11 +76,11 @@ public class FillOutTheForm extends BaseTest {
     void fieldWithoutPhoneNumber() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
-        $("#firstName").setValue("Sergey");
-        $("#lastName").setValue("Balandin");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#gender-radio-1").click();
         $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
     }
 
     @Test
@@ -89,12 +88,12 @@ public class FillOutTheForm extends BaseTest {
     void invalidPhoneNumber() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
-        $("#firstName").setValue("Sergey");
-        $("#lastName").setValue("Balandin");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#gender-radio-1").click();
-        $("#userNumber").setValue("123123123");
+        $("#userNumber").setValue(userNumberNegative);
         $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
     }
 
     @Test
@@ -102,10 +101,10 @@ public class FillOutTheForm extends BaseTest {
     void noGenderSelected() {
         open("/automation-practice-form.html");
         $("[aria-label='Close']").click();
-        $("#firstName").setValue("Sergey");
-        $("#lastName").setValue("Balandin");
-        $("#userNumber").setValue("1231231234");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userNumber").setValue(userNumber);
         $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
     }
 }
