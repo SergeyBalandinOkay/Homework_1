@@ -5,7 +5,7 @@ public class BaseTest {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.holdBrowserOpen = true;
+//        Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
     }

@@ -37,7 +37,7 @@ public class FillOutTheForm extends BaseTest {
         $("[id=resultModal]").shouldHave(text("Student Email"), text(userEmail));
         $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
         $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
-        $("[id=resultModal]").shouldHave(text("Date of Birth"), text(DateOfBirth));
+        $("[id=resultModal]").shouldHave(text("Date of Birth"), text(dateOfBirth));
         $("[id=resultModal]").shouldHave(text("Subjects"), text(subjects));
         $("[id=resultModal]").shouldHave(text("Hobbies"), text(hobbies));
         $("[id=resultModal]").shouldHave(text("Picture"), text(file));
