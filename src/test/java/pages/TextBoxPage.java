@@ -17,29 +17,34 @@ public class TextBoxPage {
    private SelenideElement outputResults = $("[id=output]");
 
     // Actions
-    public void openPage(){
+    public TextBoxPage openPage(){
         open("/text-box");
+        return this;
     }
 
-    public void typeUserName(String value){
+    public TextBoxPage typeUserName(String value){
         userNameInput.setValue(value);
+        return this;
     }
 
-    public void typeUserEmail(String value){
+    public TextBoxPage typeUserEmail(String value){
         userEmailInput.setValue(value);
+        return this;
     }
 
-    public void submitForm() {
+    public TextBoxPage submitForm() {
         submitButton.click();
+        return this;
     }
 
-    public void checkField(String key, String value){
+    public TextBoxPage checkField(String key, String value){
         outputResults.$(byId(key)).shouldHave(text(value));
+        return this;
     }
 
-    public void shouldHaveEmailError() {
+    public TextBoxPage shouldHaveEmailError() {
         userEmailInput.shouldHave(cssClass("field-error"));
+        return this;
     }
-
 }
 
