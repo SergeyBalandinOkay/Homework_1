@@ -52,18 +52,34 @@ public class FillOutTheForm extends BaseTest {
     @Test
     @Description("Проверка только на заполнение обязательных полей")
     void fillingInRequiredFields() {
-        open("/automation-practice-form.html");
-        $("[aria-label='Close']").click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $(byText(gender)).click();
-        $("#userNumber").setValue(userNumber);
-        $("#submit").click();
 
-        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text(successfulMessage));
-        $("[id=resultModal]").shouldHave(text("Student Name"), text(firstName + lastName));
-        $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
-        $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
+        registrationPage
+                .openPage()
+                .bannerClose()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .setGender(gender)
+                .typePhoneNumberName(userNumber)
+                .submitForm()
+
+                .verifyModalTitle(successfulMessage)
+                .verifyFirstNameAndLastName(firstName, lastName)
+                .verifyGender(gender)
+                .verifyMobile(userNumber);
+
+
+//        open("/automation-practice-form.html");
+//        $("[aria-label='Close']").click();
+//        $("#firstName").setValue(firstName);
+//        $("#lastName").setValue(lastName);
+//        $(byText(gender)).click();
+//        $("#userNumber").setValue(userNumber);
+//        $("#submit").click();
+
+//        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text(successfulMessage));
+//        $("[id=resultModal]").shouldHave(text("Student Name"), text(firstName + lastName));
+//        $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
+//        $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
     }
 
     @Test
