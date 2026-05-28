@@ -30,66 +30,65 @@ public class RegistrationPage {
     private SelenideElement submitButton = $("#submit");
     private SelenideElement modalTitle = $("[id=resultModal] [id=example-modal-sizes-title-lg]");
     private SelenideElement modalName = $("#resultModal");
+    private SelenideElement errorMessage = $("[id=formError]");
 
 
-
-
-    public RegistrationPage openPage(){
+    public RegistrationPage openPage() {
         open("/automation-practice-form.html");
         return this;
     }
 
-    public RegistrationPage bannerClose(){
+    public RegistrationPage bannerClose() {
         closeBannerInput.click();
         return this;
     }
 
-    public RegistrationPage typeFirstName(String value){
+    public RegistrationPage typeFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage typeLastName(String value){
+    public RegistrationPage typeLastName(String value) {
         lastNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage typeEmailName(String value){
+    public RegistrationPage typeEmailName(String value) {
         emailInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage setGender(String value){
+    public RegistrationPage setGender(String value) {
         genderContainer.click();
         return this;
     }
 
-    public RegistrationPage typePhoneNumberName(String value){
+    public RegistrationPage typePhoneNumberName(String value) {
         phoneNumberInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage typeDateOfBirth(){
+    public RegistrationPage typeDateOfBirth() {
         dateOfBirthInput.click();
         return this;
     }
 
-    public RegistrationPage firstDateOfBirth(){
+    public RegistrationPage firstDateOfBirth() {
         firstDayInput.click();
         return this;
     }
 
-    public RegistrationPage typeSubject(){
+    public RegistrationPage typeSubject() {
         subjectsInput.click();
         return this;
     }
 
-    public RegistrationPage typeDropdown(){
+    public RegistrationPage typeDropdown() {
         subjectsDropdown.click();
         return this;
     }
 
-    public RegistrationPage setHobbies(String value){
+    public RegistrationPage setHobbies(String value) {
         chooseHobbies.click();
         return this;
     }
@@ -99,31 +98,30 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage currentAddress(String value){
+    public RegistrationPage currentAddress(String value) {
         currentAddressInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage chooseState(){
+    public RegistrationPage chooseState() {
         stateInput.click();
         return this;
     }
 
-    public RegistrationPage setState(String value){
+    public RegistrationPage setState(String value) {
         enterState.click();
         return this;
     }
 
-    public RegistrationPage chooseCity(){
+    public RegistrationPage chooseCity() {
         cityInput.click();
         return this;
     }
 
-    public RegistrationPage setCity(String value){
+    public RegistrationPage setCity(String value) {
         enterCity.click();
         return this;
     }
-
 
     public RegistrationPage submitForm() {
         submitButton.click();
@@ -195,4 +193,13 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage getErrorMessage(String unsuccessfulMessage) {
+        errorMessage.shouldHave(text(unsuccessfulMessage));
+        return this;
+    }
+
+    public RegistrationPage typePhoneNumberInvalid(String value) {
+        phoneNumberInput.setValue(value);
+        return this;
+    }
 }

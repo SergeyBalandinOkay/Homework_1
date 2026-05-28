@@ -10,8 +10,10 @@ public class SimpleForm extends BaseTest {
     @Test
     @Description("Заполнение формы только с обязательными полями")
     void FillInTheMinimumFields() {
-        textBoxPage.openPage().
-                typeUserName(firstName)
+        textBoxPage
+
+                .openPage()
+                .typeUserName(firstName)
                 .submitForm()
                 .checkField("name", firstName);
     }
@@ -19,7 +21,10 @@ public class SimpleForm extends BaseTest {
     @Test
     @Description("Заполнение поле email невалидным значением")
     void EnteringAnInvalidEmail() {
-        textBoxPage.openPage().typeUserEmail(invalidEmail)
+
+        textBoxPage
+                .openPage()
+                .typeUserEmail(invalidEmail)
                 .submitForm()
                 .shouldHaveEmailError();
     }

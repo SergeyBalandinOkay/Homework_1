@@ -2,10 +2,6 @@ import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static testdata.TestData.*;
 
 public class FillOutTheForm extends BaseTest {
@@ -46,7 +42,6 @@ public class FillOutTheForm extends BaseTest {
                 .verifyPicture(file)
                 .verifyAddress(currentAddress)
                 .verifyStateAndCity(state, city);
-
     }
 
     @Test
@@ -66,65 +61,63 @@ public class FillOutTheForm extends BaseTest {
                 .verifyFirstNameAndLastName(firstName, lastName)
                 .verifyGender(gender)
                 .verifyMobile(userNumber);
-
-
-//        open("/automation-practice-form.html");
-//        $("[aria-label='Close']").click();
-//        $("#firstName").setValue(firstName);
-//        $("#lastName").setValue(lastName);
-//        $(byText(gender)).click();
-//        $("#userNumber").setValue(userNumber);
-//        $("#submit").click();
-
-//        $("[id=resultModal] [id=example-modal-sizes-title-lg]").shouldHave(text(successfulMessage));
-//        $("[id=resultModal]").shouldHave(text("Student Name"), text(firstName + lastName));
-//        $("[id=resultModal]").shouldHave(text("Gender"), text(gender));
-//        $("[id=resultModal]").shouldHave(text("Mobile"), text(userNumber));
     }
 
     @Test
     @Description("Подтверждение формы без заполнениях обязательных полей")
     void ConfirmWithoutFilling() {
-        open("/automation-practice-form.html");
-        $("[aria-label='Close']").click();
-        $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
+
+        registrationPage
+                .openPage()
+                .bannerClose()
+                .submitForm()
+
+                .getErrorMessage(unsuccessfulMessage);
     }
 
     @Test
     @Description("Подтверждение формы без заполнения мобильного телефона")
     void fieldWithoutPhoneNumber() {
-        open("/automation-practice-form.html");
-        $("[aria-label='Close']").click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#gender-radio-1").click();
-        $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
+
+        registrationPage
+                .openPage()
+                .bannerClose()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .setGender(gender)
+                .submitForm()
+
+                .getErrorMessage(unsuccessfulMessage);
     }
 
     @Test
     @Description("Подтверждение формы, если заполнены обязательные поля и номер телефона !=10 цифрами")
     void invalidPhoneNumber() {
-        open("/automation-practice-form.html");
-        $("[aria-label='Close']").click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#gender-radio-1").click();
-        $("#userNumber").setValue(userNumberNegative);
-        $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
+
+        registrationPage
+                .openPage()
+                .bannerClose()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .setGender(gender)
+                .typePhoneNumberInvalid(userNumberNegative)
+                .submitForm()
+
+                .getErrorMessage(unsuccessfulMessage);
     }
 
     @Test
     @Description("Подтверждение формы, если не выбран пол")
     void noGenderSelected() {
-        open("/automation-practice-form.html");
-        $("[aria-label='Close']").click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userNumber").setValue(userNumber);
-        $("#submit").scrollTo().click();
-        $("[id=formError]").shouldHave(text(unsuccessfulMessage));
+
+        registrationPage
+                .openPage()
+                .bannerClose()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typePhoneNumberName(userNumber)
+                .submitForm()
+
+                .getErrorMessage(unsuccessfulMessage);
     }
 }

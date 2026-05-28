@@ -1,6 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.cssClass;
@@ -11,23 +10,23 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxPage {
     // Elements
-   private SelenideElement userNameInput = $("#userName");
-   private SelenideElement userEmailInput = $("#userEmail");
-   private SelenideElement submitButton = $("#submit");
-   private SelenideElement outputResults = $("[id=output]");
+    private SelenideElement userNameInput = $("#userName");
+    private SelenideElement userEmailInput = $("#userEmail");
+    private SelenideElement submitButton = $("#submit");
+    private SelenideElement outputResults = $("[id=output]");
 
     // Actions
-    public TextBoxPage openPage(){
+    public TextBoxPage openPage() {
         open("/text-box");
         return this;
     }
 
-    public TextBoxPage typeUserName(String value){
+    public TextBoxPage typeUserName(String value) {
         userNameInput.setValue(value);
         return this;
     }
 
-    public TextBoxPage typeUserEmail(String value){
+    public TextBoxPage typeUserEmail(String value) {
         userEmailInput.setValue(value);
         return this;
     }
@@ -37,7 +36,7 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage checkField(String key, String value){
+    public TextBoxPage checkField(String key, String value) {
         outputResults.$(byId(key)).shouldHave(text(value));
         return this;
     }
@@ -47,4 +46,3 @@ public class TextBoxPage {
         return this;
     }
 }
-
