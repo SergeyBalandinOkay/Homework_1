@@ -8,7 +8,10 @@ public class TestData {
     public static String gender = "Male";
     public static String userNumber = "7775757577";
     public static String userNumberNegative = "11167575";
-    public static String dateOfBirth = "01 Jul 2008";
+    public static String birthDay = "30";
+    public static String birthMonth = "July";
+    public static String birthMonthExp = "Jul";
+    public static String birthYear = "2008";
     public static String subjects = "Chemistry";
     public static String hobbies = "Reading";
     public static String file = "myfile.png";

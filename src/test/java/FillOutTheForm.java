@@ -1,10 +1,13 @@
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.RegistrationPage;
 
 import static testdata.TestData.*;
 
 public class FillOutTheForm extends BaseTest {
+    private static final Logger log = LoggerFactory.getLogger(FillOutTheForm.class);
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
@@ -18,8 +21,7 @@ public class FillOutTheForm extends BaseTest {
                 .typeEmailName(userEmail)
                 .setGender(gender)
                 .typePhoneNumberName(userNumber)
-                .typeDateOfBirth()
-                .firstDateOfBirth()
+                .setDateOfBirth(birthDay, birthMonth, birthYear)
                 .typeSubject()
                 .typeDropdown()
                 .setHobbies(hobbies)
@@ -32,16 +34,16 @@ public class FillOutTheForm extends BaseTest {
                 .submitForm()
 
                 .verifyModalTitle(successfulMessage)
-                .verifyFirstNameAndLastName(firstName, lastName)
-                .verifyEmail(userEmail)
-                .verifyGender(gender)
-                .verifyMobile(userNumber)
-                .verifyDateOfBirth(dateOfBirth)
-                .verifySubjects(subjects)
-                .verifyHobbies(hobbies)
-                .verifyPicture(file)
-                .verifyAddress(currentAddress)
-                .verifyStateAndCity(state, city);
+                .modalResult("Student Name", firstName + lastName)
+                .modalResult("Student Email", userEmail)
+                .modalResult("Gender", gender)
+                .modalResult("Mobile", userNumber)
+                .modalResult("Date of Birth", birthDay + " " + birthMonthExp + " " + birthYear)
+                .modalResult("Subjects", subjects)
+                .modalResult("Hobbies", hobbies)
+                .modalResult("Picture", file)
+                .modalResult("Address", currentAddress)
+                .modalResult("State and City", state + " " + city);
     }
 
     @Test
@@ -58,9 +60,9 @@ public class FillOutTheForm extends BaseTest {
                 .submitForm()
 
                 .verifyModalTitle(successfulMessage)
-                .verifyFirstNameAndLastName(firstName, lastName)
-                .verifyGender(gender)
-                .verifyMobile(userNumber);
+                .modalResult("Student Name", firstName + lastName)
+                .modalResult("Gender", gender)
+                .modalResult("Mobile", userNumber);
     }
 
     @Test
