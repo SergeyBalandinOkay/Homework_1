@@ -1,14 +1,25 @@
 package testdata;
 
+import com.github.javafaker.Faker;
+import utils.RandomUtils;
+
+import java.util.Random;
+
+import static utils.RandomUtils.getRandomInt;
+
 public class TestData {
-    public static String firstName = "Sergey ";
-    public static String lastName = "Balandin";
-    public static String userEmail = "loveandpeace@mail.ru";
+
+    static Faker faker = new Faker();
+
+    public static String firstName = faker.name().firstName();
+    public static String lastName = faker.name().lastName();
+    public static String fullName = firstName + " " + lastName;
+    public static String userEmail = faker.internet().emailAddress();
     public static String invalidEmail = "loveandpeace";
-    public static String gender = "Male";
-    public static String userNumber = "7775757577";
-    public static String userNumberNegative = "11167575";
-    public static String birthDay = "30";
+    public static String gender = RandomUtils.getRandomGender();
+    public static String userNumber = faker.phoneNumber().subscriberNumber(10);
+    public static String userNumberNegative = faker.phoneNumber().subscriberNumber(5);
+    public static String birthDay = String.valueOf(getRandomInt(1,31));
     public static String birthMonth = "July";
     public static String birthMonthExp = "Jul";
     public static String birthYear = "2008";
