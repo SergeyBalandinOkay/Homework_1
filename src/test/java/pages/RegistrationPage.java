@@ -20,7 +20,6 @@ public class RegistrationPage {
     private final SelenideElement genderContainer = $(byText(gender));
     private final SelenideElement phoneNumberInput = $("#userNumber");
     private final SelenideElement subjectsInput = $("#subjectsInput");
-    private final SelenideElement subjectsDropdown = $("#subjectsDropdown");
     private final SelenideElement chooseHobbies = $(byText(hobbies));
     private final SelenideElement uploadPicture = $("#uploadPicture");
     private final SelenideElement currentAddressInput = $("#currentAddress");
@@ -76,15 +75,11 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage typeSubject() {
-        subjectsInput.click();
+    public RegistrationPage typeSubject(String value) {
+        subjectsInput.setValue(value).pressEnter();
         return this;
     }
 
-    public RegistrationPage typeDropdown() {
-        subjectsDropdown.click();
-        return this;
-    }
 
     public RegistrationPage setHobbies(String value) {
         chooseHobbies.click();

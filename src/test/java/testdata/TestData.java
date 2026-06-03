@@ -19,14 +19,15 @@ public class TestData {
     public static String gender = RandomUtils.getRandomGender();
     public static String userNumber = faker.phoneNumber().subscriberNumber(10);
     public static String userNumberNegative = faker.phoneNumber().subscriberNumber(5);
-    public static String birthDay = String.valueOf(getRandomInt(1,31));
-    public static String birthMonth = "July";
+    public static String birthDay = String.valueOf(getRandomInt(1,28));
+    public static String birthMonth = RandomUtils.getRandomMonth();
     public static String birthMonthExp = "Jul";
-    public static String birthYear = "2008";
-    public static String subjects = "Chemistry";
-    public static String hobbies = "Reading";
+    public static String birthYear = String.valueOf(faker.number().numberBetween(1950, 2005));
+    public static String subjects = faker.options().option("English", "Chemistry", "Computer Science", "Commerce",
+            "Economics", "Social Studies");
+    public static String hobbies = RandomUtils.getRandomHobbies();
     public static String file = "myfile.png";
-    public static String currentAddress = "place23";
+    public static String currentAddress = faker.address().fullAddress();
     public static String state = "Uttar Pradesh";
     public static String city = "Agra";
     public static String successfulMessage = "Thanks for submitting the form";

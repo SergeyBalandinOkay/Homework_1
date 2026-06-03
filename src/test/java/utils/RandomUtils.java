@@ -27,6 +27,19 @@ public class RandomUtils {
         return getRandomItemFromStringArray(genders);
     }
 
+    public static String getRandomHobbies() {
+        String[] hobbies = {"Sports", "Reading", "Music"};
+
+        return getRandomItemFromStringArray(hobbies);
+    }
+
+    public static String getRandomMonth() {
+        String[] month = {"January", "February", "March", "April", "May",
+                "June", "July", "August", "September", "October", "November", "December"};
+
+        return getRandomItemFromStringArray(month);
+    }
+
     public static String getRandomItemFromStringArray(String[] stringArray) {
         int arrayLength = stringArray.length;
         int randomIndex = getRandomInt(0, arrayLength - 1);
