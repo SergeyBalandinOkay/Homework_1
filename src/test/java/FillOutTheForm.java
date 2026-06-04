@@ -59,7 +59,7 @@ public class FillOutTheForm extends BaseTest {
                 .submitForm()
 
                 .verifyModalTitle(successfulMessage)
-                .modalResult("Student Name", firstName + lastName)
+                .modalResult("Student Name", fullName)
                 .modalResult("Gender", gender)
                 .modalResult("Mobile", userNumber);
     }

@@ -1,9 +1,7 @@
-import com.github.javafaker.Faker;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
-import static testdata.TestData.*;
 import static utils.RandomUtils.getRandomString;
 
 public class SimpleForm extends BaseTest {
@@ -14,9 +12,8 @@ public class SimpleForm extends BaseTest {
     void EnteringAnInvalidEmail() {
         String invalidEmail = getRandomString(10);
 
-        textBoxPage
-                .openPage()
-                .typeUserEmail(invalidEmail)
+        textBoxPage.openPage().
+                typeUserEmail(invalidEmail)
                 .submitForm()
                 .shouldHaveEmailError();
     }
@@ -26,8 +23,7 @@ public class SimpleForm extends BaseTest {
     void FillInTheMinimumFieldsWithFaker() {
         String firstName = getRandomString(10);
 
-        textBoxPage
-                .openPage()
+        textBoxPage.openPage()
                 .typeUserName(firstName)
                 .submitForm()
 

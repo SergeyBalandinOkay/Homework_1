@@ -3,7 +3,6 @@ package utils;
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static java.lang.String.format;
 
 public class RandomUtils {
     public static String getRandomString(int lenghth) {
@@ -45,6 +44,5 @@ public class RandomUtils {
         int randomIndex = getRandomInt(0, arrayLength - 1);
 
         return stringArray[randomIndex];
-
     }
 }
