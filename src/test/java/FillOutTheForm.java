@@ -1,48 +1,49 @@
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.RegistrationPage;
+import testdata.TestData;
 
 import static testdata.TestData.*;
 
 public class FillOutTheForm extends BaseTest {
-    private static final Logger log = LoggerFactory.getLogger(FillOutTheForm.class);
     RegistrationPage registrationPage = new RegistrationPage();
+    TestData testData = new TestData();
 
     @Test
     @Description("Проверка на заполнение всех полей")
     void successfulFillFormTest() {
+
+
         registrationPage
                 .openPage()
                 .bannerClose()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmailName(userEmail)
-                .setGender(gender)
-                .typePhoneNumberName(userNumber)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
-                .typeSubject(subjects)
-                .setHobbies(hobbies)
-                .uploadPicture(file)
-                .currentAddress(currentAddress)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeEmailName(testData.userEmail)
+                .setGender(testData.gender)
+                .typePhoneNumberName(testData.userNumber)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth, testData.birthYear)
+                .typeSubject(testData.subjects)
+                .setHobbies(testData.hobbies)
+                .uploadPicture(testData.file)
+                .currentAddress(testData.currentAddress)
                 .chooseState()
-                .setState(state)
+                .setState(testData.state)
                 .chooseCity()
-                .setCity(city)
+                .setCity(testData.city)
                 .submitForm()
 
                 .verifyModalTitle(successfulMessage)
-                .modalResult("Student Name", fullName)
-                .modalResult("Student Email", userEmail)
-                .modalResult("Gender", gender)
-                .modalResult("Mobile", userNumber)
-                .modalResult("Date of Birth", birthDay + " " + birthMonthExp + " " + birthYear)
-                .modalResult("Subjects", subjects)
-                .modalResult("Hobbies", hobbies)
-                .modalResult("Picture", file)
-                .modalResult("Address", currentAddress)
-                .modalResult("State and City", state + " " + city);
+                .modalResult("Student Name", testData.fullName)
+                .modalResult("Student Email", testData.userEmail)
+                .modalResult("Gender", testData.gender)
+                .modalResult("Mobile", testData.userNumber)
+                .modalResult("Date of Birth", testData.birthDay + " " + testData.birthMonthExp + " " + testData.birthYear)
+                .modalResult("Subjects", testData.subjects)
+                .modalResult("Hobbies", testData.hobbies)
+                .modalResult("Picture", testData.file)
+                .modalResult("Address", testData.currentAddress)
+                .modalResult("State and City", testData.stateAndCity);
     }
 
     @Test
@@ -52,16 +53,16 @@ public class FillOutTheForm extends BaseTest {
         registrationPage
                 .openPage()
                 .bannerClose()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(gender)
-                .typePhoneNumberName(userNumber)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
+                .typePhoneNumberName(testData.userNumber)
                 .submitForm()
 
                 .verifyModalTitle(successfulMessage)
-                .modalResult("Student Name", fullName)
-                .modalResult("Gender", gender)
-                .modalResult("Mobile", userNumber);
+                .modalResult("Student Name", testData.fullName)
+                .modalResult("Gender", testData.gender)
+                .modalResult("Mobile", testData.userNumber);
     }
 
     @Test
@@ -83,9 +84,9 @@ public class FillOutTheForm extends BaseTest {
         registrationPage
                 .openPage()
                 .bannerClose()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(gender)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
                 .submitForm()
 
                 .getErrorMessage(unsuccessfulMessage);
@@ -98,10 +99,10 @@ public class FillOutTheForm extends BaseTest {
         registrationPage
                 .openPage()
                 .bannerClose()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(gender)
-                .typePhoneNumberInvalid(userNumberNegative)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
+                .typePhoneNumberInvalid(testData.userNumberNegative)
                 .submitForm()
 
                 .getErrorMessage(unsuccessfulMessage);
@@ -114,9 +115,9 @@ public class FillOutTheForm extends BaseTest {
         registrationPage
                 .openPage()
                 .bannerClose()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typePhoneNumberName(userNumber)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typePhoneNumberName(testData.userNumber)
                 .submitForm()
 
                 .getErrorMessage(unsuccessfulMessage);

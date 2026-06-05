@@ -7,29 +7,37 @@ import static utils.RandomUtils.getRandomInt;
 
 public class TestData {
 
-    static Faker faker = new Faker();
+    Faker faker = new Faker();
 
-    public static String firstName = faker.name().firstName();
-    public static String lastName = faker.name().lastName();
-    public static String fullName = firstName + " " + lastName;
-    public static String userEmail = faker.internet().emailAddress();
-    public static String invalidEmail = "loveandpeace";
-    public static String gender = RandomUtils.getRandomGender();
-    public static String userNumber = faker.phoneNumber().subscriberNumber(10);
-    public static String userNumberNegative = faker.phoneNumber().subscriberNumber(5);
-    public static String birthDay = String.valueOf(getRandomInt(1, 28));
-    public static String birthMonth = RandomUtils.getRandomMonth();
-    public static String birthMonthExp = birthMonth.substring(0, 3);
-    public static String birthYear = String.valueOf(faker.number().numberBetween(1950, 2005));
-    public static String subjects = faker.options().option("Maths", "Physics", "Chemistry", "Biology",
+    public final String firstName = faker.name().firstName();
+    public final String lastName = faker.name().lastName();
+    public final String fullName = firstName + " " + lastName;
+    public final String userEmail = faker.internet().emailAddress();
+    public final String gender = faker.options().option("Male", "Female", "Other");
+    public final String userNumber = faker.phoneNumber().subscriberNumber(10);
+    public final String userNumberNegative = faker.phoneNumber().subscriberNumber(5);
+    public final String birthDay = String.valueOf(getRandomInt(1, 28));
+    public final String birthMonth = RandomUtils.getRandomMonth();
+    public final String birthMonthExp = birthMonth.substring(0, 3);
+    public final String birthYear = String.valueOf(faker.number().numberBetween(1950, 2005));
+    public final String subjects = faker.options().option("Maths", "Physics", "Chemistry", "Biology",
             "English", "Computer Science", "Economics", "Arts", "History", "Civics");
-    public static String hobbies = RandomUtils.getRandomHobbies();
-    public static String file = "myfile.png";
-    public static String currentAddress = faker.address().fullAddress();
-    public static String state = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
-    public static String city = selectCity(state);
+    public final String hobbies = faker.options().option("Music", "Sports", "Reading");
+    public final String file = "myfile.png";
+    public final String currentAddress = faker.address().fullAddress();
 
-    public static String selectCity(String state) {
+    public final String state;
+    public final String city;
+    public final String stateAndCity;
+
+    {
+        String generatedState = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
+        this.state = generatedState;
+        this.city = selectCity(generatedState);
+        this.stateAndCity = this.state + " " + this.city;
+    }
+
+    public String selectCity(String state) {
         return switch (state) {
             case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
             case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Merrut");
@@ -39,6 +47,6 @@ public class TestData {
         };
     }
 
-    public static String successfulMessage = "Thanks for submitting the form";
-    public static String unsuccessfulMessage = "Please fill required fields and enter a valid 10-digit mobile number.";
+    public final static String successfulMessage = "Thanks for submitting the form";
+    public final static String unsuccessfulMessage = "Please fill required fields and enter a valid 10-digit mobile number.";
 }

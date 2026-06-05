@@ -20,18 +20,6 @@ public class RandomUtils {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
-    public static String getRandomGender() {
-        String[] genders = {"Male", "Female", "Other"};
-
-        return getRandomItemFromStringArray(genders);
-    }
-
-    public static String getRandomHobbies() {
-        String[] hobbies = {"Sports", "Reading", "Music"};
-
-        return getRandomItemFromStringArray(hobbies);
-    }
-
     public static String getRandomMonth() {
         String[] month = {"January", "February", "March", "April", "May",
                 "June", "July", "August", "September", "October", "November", "December"};

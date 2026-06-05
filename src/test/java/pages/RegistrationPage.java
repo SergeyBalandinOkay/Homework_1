@@ -3,24 +3,23 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultFinalTable;
+import testdata.TestData;
 
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static testdata.TestData.*;
-import static testdata.TestData.city;
 
-public class RegistrationPage {
+public class RegistrationPage extends TestData {
     private final SelenideElement closeBannerInput = $("[aria-label='Close']");
     private final SelenideElement firstNameInput = $("#firstName");
     private final SelenideElement lastNameInput = $("#lastName");
     private final SelenideElement emailInput = $("#userEmail");
-    private final SelenideElement genderContainer = $(byText(gender));
+    private final SelenideElement genderContainer = $("#genterWrapper");
     private final SelenideElement phoneNumberInput = $("#userNumber");
     private final SelenideElement subjectsInput = $("#subjectsInput");
-    private final SelenideElement chooseHobbies = $(byText(hobbies));
+    private final SelenideElement chooseHobbies = $("#hobbiesWrapper");
     private final SelenideElement uploadPicture = $("#uploadPicture");
     private final SelenideElement currentAddressInput = $("#currentAddress");
     private final SelenideElement stateInput = $("#state");
@@ -60,7 +59,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setGender(String value) {
-        genderContainer.click();
+        genderContainer.$(byText(value)).click();
         return this;
     }
 
@@ -82,7 +81,7 @@ public class RegistrationPage {
 
 
     public RegistrationPage setHobbies(String value) {
-        chooseHobbies.click();
+        chooseHobbies.$(byText(value)).click();
         return this;
     }
 
@@ -102,7 +101,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setState(String value) {
-        enterState.click();
+        $(byText(value)).click();
         return this;
     }
 
@@ -112,7 +111,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setCity(String value) {
-        enterCity.click();
+        $(byText(value)).click();
         return this;
     }
 
